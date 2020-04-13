@@ -1,6 +1,6 @@
-# Projeto Financiamento
+# A Simple Bank Loan System
 
-Aplicação que simular um financiamento de empréstimo bancário.Simples, básico e funcional.
+Aplicação que simula um financiamento de empréstimo bancário.Simples, básico e funcional.
 
 ##  Tecnologias Utilizadas
 
