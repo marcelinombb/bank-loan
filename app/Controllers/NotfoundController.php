@@ -7,7 +7,10 @@ use app\Core\Controller;
 class NotfoundController extends Controller {
 
     public function index() {
-        $this->loadView('404', $data());
+        $viewPath = '';
+        $viewName = "404";
+
+        $this->loadView($viewPath, $viewName);
     }
 
 }

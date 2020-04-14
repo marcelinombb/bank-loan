@@ -4,48 +4,63 @@ namespace app\Core;
 
 class Core {
 
-    public function run() {
-        $url = '/';
+    private $url;
+    private $route;
+    private $params = [];
+    private $controller;
+    private $action;
+    private $nameSpace = '\app\\Controllers\\';
 
-        if (isset($_GET['url'])) {
-            $url .= $_GET['url'];
-        }
+    // verifica se existe uma variavel url no verbo GET e trata a string
+    private function parseUrl() {
+        $this->url = rtrim(filter_input(INPUT_GET, "url", FILTER_SANITIZE_STRING));
 
-        $params = array();
+        if ($this->url):
+            $this->url = explode("/", $this->url);
+        else:
+            $this->url = null;
+        endif;
 
-        if (!empty($url) && ($url != '/')) {
-            $url = explode('/', $url);
-            array_shift($url);
+        return $this->url;
+    }
 
-            $currentController = $url[0] . "Controller";
-            array_shift($url);
+    // Trata a rota informada na url e chamada a classe, método e parametros informados.
+    private function makeRoute() {
 
-            if (isset($url[0]) && !empty($url[0])) {
-                $currentAction = $url[0];
-                array_shift($url);
+        if ($this->parseUrl()) {
+
+            $this->controller = strtolower(array_shift($this->url)) . "Controller";
+
+            if (isset($this->url[0]) && !empty($this->url[0])) {
+                $this->action = array_shift($this->url);
             } else {
-                $currentAction = "index";
+                $this->action = "index";
             }
 
-            if (count($url > 0)) {
-                $params = $url;
+            if (!empty($this->url)) {
+                $this->params = $this->url;
             }
         } else {
-            $currentController = "HomeController";
-            $currentAction = "index";
+            $this->controller = "HomeController";
+            $this->action = "index";
         }
 
-        $currentController = ucfirst($currentController);
-        $prefixo = '\app\Controllers\\';
+        $this->controller = ucfirst($this->controller);
+    }
 
-        if ((!file_exists('app\Controllers/' . $currentController . '.php')) || (!method_exists($prefixo . $currentController, $currentAction))) {
-            $currentController = 'NotfoundController';
-            $currentAction = 'index';
+    public function run() {
+        $this->makeRoute();
+
+        // verifica pela existencia do arquivo da classe e do méthodo da classe
+        if ((!file_exists('app/Controllers/' . $this->controller . '.php')) || (!method_exists($this->nameSpace . $this->controller, $this->action))) {
+            $this->controller = 'NotfoundController';
+            $this->action = 'index';
         }
 
-        $newController = $prefixo . $currentController;
-        $controller = new $newController();
-        call_user_func_array(array($controller, $currentAction), $params);
+        $this->controller = $this->nameSpace . $this->controller;
+
+        // será chamado o controller, método e paramametro passados na url
+        call_user_func_array(array(new $this->controller(), $this->action), $this->params);
     }
 
 }

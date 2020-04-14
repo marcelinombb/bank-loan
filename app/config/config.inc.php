@@ -1,11 +1,13 @@
 <?php
 
-require_once "environment.php";
+include_once "environment.php";
+
 //include "libs/vendor/autoload.php";
-include "../bank-loan/my_autoload.php";
+include_once dirname("my_autoload") . "/my_autoload.php";
+
 // CONFIGURAÇÃO DO AMBIENTE #####################
 if (ENVIRONMENT == "development") {
-    define("BASE_URL", "http://localhost/banco/");
+    define("BASE_URL", "http://localhost/bank-loan");
 } else {
     define("BASE_URL", "http://meusite.com.br/");
 }

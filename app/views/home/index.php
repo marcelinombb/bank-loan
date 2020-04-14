@@ -1,1 +1,1 @@
-<h1><?php echo $product_list; ?></h1>
+<?php var_dump($client_list); ?>

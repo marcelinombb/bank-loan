@@ -10,7 +10,12 @@ class HomeController extends Controller {
     public function index() {
         $viewPath = 'home/';
         $viewName = "index";
-        $this->data['product_list'] = "Lista de Clientes";
+
+       $client = new \stdClass;
+       $client->nome = "Fulano";
+       $client->email = "fulano@mail.com";
+
+        $this->data['client_list'] = $client;
         
         $this->loadTemplate($viewPath, $viewName, $this->data);
     }

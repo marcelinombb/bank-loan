@@ -6,9 +6,9 @@ if (session_status() === PHP_SESSION_NONE) {
     echo "Error: Verifique as configurações de sessão";
 }
 
-require_once "app/config/config.inc.php";
-//require_once "libs/vendor/autoload.php";
-require_once "../bank-loan/my_autoload.php";
+include_once "app/config/config.inc.php";
+//include_once dirname("autoload") . "/autoload.php";
+include_once "my_autoload.php";
 
 $core = new app\Core\Core();
 $core->run();
