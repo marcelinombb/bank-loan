@@ -1,4 +1,4 @@
-<?php declare(strict_types=1);
+<?php
 
 /**
  * @author M Paulo
@@ -19,17 +19,15 @@ final class Connection {
     private static string $DRIVER = DRIVER;
     private static string $CHARSET = CHARSET;
 
-    private static Connection $conn = null;
+    private static $conn = null;
 
     // Construtor privado - permite que a classe seja instanciada apenas internamente.
     private function __construct() {}
 
     /**
      * Método estático - acessível sem instanciação.Retorna uma instância única de conexão por vez.
-     *
-     * @return PDO
      */
-    public static function connect() : Connection {
+    public static function connect() : PDO {
         // Garante uma única instância.Se não existe uma conexão, uma nova será criada.
         if (self::$conn === null) {
             try {
@@ -46,6 +44,6 @@ final class Connection {
     }
 
     private function __clone() {}
-    private function __construct() {}
+    private function __wakeup() {}
 
 }

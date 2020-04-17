@@ -1,0 +1,1 @@
+<?php echo "Seja Bem-Vindo {$client->name} {$client->surname}"; ?>

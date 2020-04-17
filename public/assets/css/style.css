@@ -1,0 +1,76 @@
+body {
+    background-color: #F5FFFA;
+}
+
+#login-text {
+    padding: 120px 30px 50px 30px;
+    font-weight: 500;
+}
+
+#login-text h2 {
+    color: #fff;
+    font-size: 22pt;
+    text-align: center;
+}
+
+#login-text p {
+    color: #F5FFFA;
+    font-size: 10pt;
+}
+
+#login-text .login-btn, #sign-form .submit-account {
+    border-radius: 10px;
+    border: 1px solid #fff;
+    background-color: #2E8B57;
+    color: #fff;
+}
+
+#left-column {
+    border-radius: 0px 20px 20px 0px;
+    background-color: #fff;
+}
+
+#right-column {
+    border-radius: 20px 0px 0px 20px;
+    background-color: #2E8B57;
+}
+
+#create-account {
+    padding: 50px 0px 30px 0px;
+    text-align: center;
+    color: #2E8B57;
+}
+
+.submit-account {
+    border-radius: 10px;
+    background-color: #2E8B57;
+    color: #fff;
+}
+
+#login-form, #sign-form {
+    padding: 20px 30px 50px 30px;
+    font-weight: 500;
+}
+
+.copyright {
+    margin-top: 100px;
+}
+
+.copyright #copyright-text, #sign-form h2 {
+    text-align: center;
+}
+
+#sign-form {
+    padding: 120px 30px 50px 30px;
+    color: #fff;
+}
+
+@media (max-width: 767px) {
+    #right-column {
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    #left-column {
+        border-radius: 0px 0px 20px 20px;
+    }
+}
