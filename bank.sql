@@ -50,7 +50,7 @@ CREATE TABLE `client` (
   `name` varchar(50) NOT NULL,
   `surname` varchar(50) DEFAULT NULL,
   `cpf` varchar(11) NOT NULL,
-  `pass` varchar(32) NOT NULL,
+  `pass` varchar(32) NOT NULL DEFAULT 0,
   `ordenado` decimal(8,2) UNSIGNED NOT NULL DEFAULT 0,
   `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
