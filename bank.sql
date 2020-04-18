@@ -48,10 +48,10 @@ CREATE TABLE `bank` (
 CREATE TABLE `client` (
   `id` int(10) UNSIGNED NOT NULL,
   `name` varchar(50) NOT NULL,
-  `surname` varchar(50) NOT NULL,
+  `surname` varchar(50) DEFAULT NULL,
   `cpf` varchar(11) NOT NULL,
   `pass` varchar(32) NOT NULL,
-  `ordenado` decimal(8,2) UNSIGNED NOT NULL,
+  `ordenado` decimal(8,2) UNSIGNED NOT NULL DEFAULT 0,
   `token` varchar(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -83,7 +83,7 @@ CREATE TABLE `loan` (
   `loan_type` tinyint(1) UNSIGNED NOT NULL,
   `remaining_amount` decimal(8,2) UNSIGNED NOT NULL,
   `loan_date` timestamp NOT NULL DEFAULT current_timestamp(),
-  `status` tinyint(1) UNSIGNED NOT NULL,
+  `status` tinyint(1) UNSIGNED NOT NULL DEFAULT 0,
   `client_id` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -126,8 +126,8 @@ CREATE TABLE `manager` (
 CREATE TABLE `parcel` (
   `id` int(10) UNSIGNED NOT NULL,
   `value` decimal(8,2) UNSIGNED NOT NULL,
-  `status` tinyint(3) UNSIGNED NOT NULL,
-  `delay_cost` decimal(8,2) UNSIGNED NOT NULL,
+  `status` tinyint(3) UNSIGNED NOT NULL DEFAULT 0,
+  `delay_cost` decimal(8,2) UNSIGNED NOT NULL DEFAULT 0,
   `due_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `payday` timestamp NOT NULL DEFAULT current_timestamp(),
   `loan_id` int(10) UNSIGNED NOT NULL
