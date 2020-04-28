@@ -1,12 +1,6 @@
 const BASE_URL = "http://localhost/bank-loan/";
 
-function loadForm() {
-    let rightColumn = document.querySelector("#right-column").innerHTML = signinForm();
-}
-
 function signinForm() {
-    //let signinForm = document.querySelector("#right-column");
-    //signinForm.innerHTML('')
     $("#right-column").load(BASE_URL+"app/views/login/signin_form.php");
 }
 
@@ -68,20 +62,23 @@ function signupClient() {
             pass: pass
         };
 
-        let options = {
+        const options = {
             method: 'POST',
-            body: JSON.stringify(data),
             headers: {
-                'Content-Type': 'application/json'
-            }
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
         };
-        
-        const URL = BASE_URL + 'auth/signup';
-        fetch(URL, options).then(response => response.json())
+            
+       const URL = BASE_URL + 'auth/signup';
+            
+        fetch(URL, options)
+        .then(response => response.json())
         .then(data => {
             let message = "registration failed";
             let modalAlert = '#signup-alert';
-            let classAlert = 'alert-warning'
+            let classAlert = 'alert-warning';
             
             if (data.success === true) {
                 message = "registration successful, sign in with cpf and password";
@@ -91,11 +88,11 @@ function signupClient() {
             } else {
                 messageAlert(message, modalAlert, classAlert);
            }
-
         })
         .catch(error => {
             console.log(error);
-        });
+        })
+        
     }
 }
 
@@ -104,7 +101,6 @@ function messageAlert(message, modalAlert, classAlert) {
 
     modal.querySelector('#alert-class').classList.add(classAlert);
     modal.querySelector('#alert-class').textContent = message;
-    //$(modalAlert).modal('show');
 
     $(modalAlert).fadeIn(700, function(){
         window.setTimeout(function(){
@@ -165,7 +161,6 @@ function signupFullClient() {
             } else {
                 messageAlert(message, modalAlert, classAlert);
            }
-
         })
         .catch(error => {
             console.log(error);

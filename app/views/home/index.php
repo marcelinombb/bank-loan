@@ -32,7 +32,7 @@
                         <h1>Criar Conta</h1>
                     </div>
                     
-                    <form id="login-form">
+                    <form id="signup-form">
                         <div class="form-group">
                             <label for="client-name">Nome</label>
                             <input type="text" class="form-control" id="client-name" required="required" placeholder="Insira nome">
@@ -42,13 +42,12 @@
                             <label for="client-cpf">CPF</label>
                             <input type="text" class="form-control" id="client-cpf" required="required" placeholder="Insira CPF">
                         </div>
-
                         <div class="form-group">
-                            <label for="client-email">E-mail</label>
-                            <input type="email" class="form-control" id="client-email" required="required" placeholder="Insira e-mail">
+                            <label for="client-pass">Senha</label>
+                            <input type="password" class="form-control" id="client-pass" required="required" placeholder="Insira senha">
                         </div>
                         
-                        <button type="submit" class="btn submit-account">Cadastrar</button>
+                        <button class="btn submit-account" onclick="signup()">Cadastrar</button>
                     </form>
 
                 </div>
