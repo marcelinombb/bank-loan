@@ -19,7 +19,7 @@ final class Connection {
     private static string $DRIVER = DRIVER;
     private static string $CHARSET = CHARSET;
 
-    private static $conn = null;
+    private static ?PDO $conn;
 
     // Construtor privado - permite que a classe seja instanciada apenas internamente.
     private function __construct() {}
@@ -29,7 +29,7 @@ final class Connection {
      */
     public static function connect() : PDO {
         // Garante uma única instância.Se não existe uma conexão, uma nova será criada.
-        if (self::$conn === null) {
+        if (empty(self::$conn)) {
             try {
 
                 self::$conn = new PDO(self::$DRIVER . ":host=" . self::$HOST . ";dbname=" . self::$DBNAME . ";charset=" . self::$CHARSET, self::$USER, self::$PASS);

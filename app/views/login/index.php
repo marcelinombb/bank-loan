@@ -11,10 +11,10 @@
     <body>
     
         <div class="container-fluid">
-            <div class="row justify-content-center mt-5" id="login-box">
+            <div class="row justify-content-center mt-5" id="signin-box">
                 <div class="col-md-3" id="right-column">
                     
-                    <div class="d-flex flex-column" id="login-text">
+                    <div class="d-flex flex-column" id="signin-text">
                         <h2>Bem Vindo!</h2>
 
                         <p>
@@ -22,7 +22,7 @@
                             Por favor, informe seus dados para entrar
                         </p>
 
-                        <button class="btn login-btn" onclick="signinForm()">Entrar</button>
+                        <button class="btn signin-btn" onclick="signinForm()">Entrar</button>
                     </div>
 
                 </div>
@@ -32,23 +32,23 @@
                         <h1>Criar Conta</h1>
                     </div>
                     
-                    <form id="login-form">
+                    <form id="signup-form">
                         <div class="form-group">
-                            <label for="client-name">Nome</label>
-                            <input type="text" class="form-control" id="client-name" required="required" placeholder="Insira nome">
+                            <label for="signup-cpf">CPF</label>
+                            <input type="text" class="form-control" id="signup-cpf" required="required" placeholder="Insira CPF">
                         </div>
 
                         <div class="form-group">
-                            <label for="client-cpf">CPF</label>
-                            <input type="text" class="form-control" id="client-cpf" required="required" placeholder="Insira CPF">
+                            <label for="signup-email">E-mail</label>
+                            <input type="email" class="form-control" id="signup-email" required="required" placeholder="Insira e-mail">
                         </div>
 
                         <div class="form-group">
-                            <label for="client-email">E-mail</label>
-                            <input type="email" class="form-control" id="client-email" required="required" placeholder="Insira e-mail">
+                            <label for="signup-pass">Senha</label>
+                            <input type="text" class="form-control" id="signup-pass" required="required" placeholder="Insira uma senha">
                         </div>
                         
-                        <button type="submit" class="btn submit-account">Cadastrar</button>
+                        <button type="submit" class="btn submit-account" onclick="signupClient()">Cadastrar</button>
                     </form>
 
                 </div>
@@ -72,13 +72,13 @@
             </div>
         </footer>
 
-        
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/script.js"></script>
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/jquery.min.js"></script>
-        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/script.js"></script>
-        
+        <?php $this->loadView("alerts/", "auth_alert"); ?>
+        <?php $this->loadView("alerts/", "signup_alert"); ?>
     </body>
 </html>
