@@ -147,4 +147,27 @@ class AuthController extends Controller {
         header("Location:" . BASE_URL . "/auth");
         exit;
     }
-}?>
+
+    public function recoverPass(){
+    
+        $form = json_decode(file_get_contents('php://input'), true);
+        $cpf = filter_var($form['cpf'],FILTER_SANITIZE_STRING);
+        $name = filter_var($form['name'],FILTER_SANITIZE_STRING);
+        $email = filter_var($form['email'],FILTER_SANITIZE_STRING);
+        $response['success'] = false;
+        if ($cpf && $name && $email) {
+            $client = new Client();
+            $client->setCpf($cpf);
+            $client->setName($name);
+            $client->setEmail($email);
+            $clientDAO = new ClientDAO();
+            if ($clientDAO->getPass($client)) {
+                # PHPMailer aqui
+                $response['success'] = true;
+            }
+        }
+        echo json_encode($response);
+
+    }
+}
+?>
