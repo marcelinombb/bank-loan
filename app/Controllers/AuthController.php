@@ -6,6 +6,7 @@ use app\Core\Controller;
 use app\Models\ClientDAO;
 use app\Models\Client;
 use app\Models\Auth;
+use app\PHP_Mailer\PHPMail;
 
 class AuthController extends Controller {
     
@@ -161,8 +162,9 @@ class AuthController extends Controller {
             $client->setName($name);
             $client->setEmail($email);
             $clientDAO = new ClientDAO();
-            if ($clientDAO->getPass($client)) {
-                # PHPMailer aqui
+            $mail = new PHPMail();
+            $pass = $clientDAO->getPass($client) ;
+            if ($mail->sendEmail($pass['pass'])) {
                 $response['success'] = true;
             }
         }
