@@ -19,7 +19,7 @@ class PHPMail{
 			$mail->SMTPAuth = true;
 			$mail->SMTPSecure = 'tls';
 			$mail->Username = 'marcelinomatheus65@gmail.com';
-			$mail->Password = 'macacogordo';
+			$mail->Password = 'senha';
 			$mail->Port = 587;
 
 			//Configuração remetente destinatario
