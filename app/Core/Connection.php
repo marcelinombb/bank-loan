@@ -12,14 +12,14 @@ use \PDO;
 
 final class Connection {
 
-    private static string $HOST = HOST;
-    private static string $DBNAME = DBNAME;
-    private static string $USER = USER;
-    private static string  $PASS = PASS;
-    private static string $DRIVER = DRIVER;
-    private static string $CHARSET = CHARSET;
+    private static $HOST = HOST;
+    private static $DBNAME = DBNAME;
+    private static $USER = USER;
+    private static  $PASS = PASS;
+    private static $DRIVER = DRIVER;
+    private static $CHARSET = CHARSET;
 
-    private static $conn = null;
+    private static ?PDO $conn;
 
     // Construtor privado - permite que a classe seja instanciada apenas internamente.
     private function __construct() {}
@@ -27,9 +27,9 @@ final class Connection {
     /**
      * Método estático - acessível sem instanciação.Retorna uma instância única de conexão por vez.
      */
-    public static function connect() : PDO {
+    public static function connect() {
         // Garante uma única instância.Se não existe uma conexão, uma nova será criada.
-        if (self::$conn === null) {
+        if (empty(self::$conn)) {
             try {
 
                 self::$conn = new PDO(self::$DRIVER . ":host=" . self::$HOST . ";dbname=" . self::$DBNAME . ";charset=" . self::$CHARSET, self::$USER, self::$PASS);

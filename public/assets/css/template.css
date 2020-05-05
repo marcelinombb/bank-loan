@@ -1,0 +1,46 @@
+body {
+    background-color: #F5FFFA;
+}
+
+.bank-logo h1 {
+    text-transform: uppercase;
+    color: #2E8B57;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+#btn-logged {
+    background-color: #2E8B57; 
+    border-color: #2E8B57;
+}
+
+div.top-menu {
+    margin-left: 170px;
+    margin-right: 170px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+div.bottom-menu { 
+    background-image: linear-gradient(rgba(0,0,0,0.8), #2E8B57);
+    padding-left: 170px;
+    padding-right: 170px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
+
+a.nav-item.nav-link {
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 900;
+}
+
+.principal-container {
+    padding-left: 185px;
+    padding-right: 185px;
+}
+
+#signupfull-alert-background {
+    background-color: rgba(0,0,0,0.8);
+}

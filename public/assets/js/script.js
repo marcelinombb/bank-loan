@@ -1,41 +1,20 @@
 const BASE_URL = "http://localhost/bank-loan/";
 
-function loadForm() {
-    let rightColumn = document.querySelector("#right-column").innerHTML = loginForm();
+function signinForm() {
+    $("#right-column").load(BASE_URL+"app/views/login/signin_form.php");
 }
-
-function loginForm() {
-    let form;
-
-    form = `<div class="d-flex flex-column" id="sign-form">
-    <h2>Entrar</h2>
-    <form>
-    <div class="form-group">
-        <label for="sign-cpf">CPF</label>
-        <input type="password" class="form-control" id="sign-cpf" required="required" placeholder="Insira nome">
-    </div>
-
-    <div class="form-group">
-        <label for="sign-pass">Senha</label>
-        <input type="text" class="form-control" id="sign-pass" required="required" placeholder="Insira CPF">
-    </div>
-    
-    <button type="submit" class="btn submit-account" onclick="login()">Entrar</button>
-    </form>
-    </div>`
-
-    return form;
+function recoverPassForm (){
+    $("#right-column").load(BASE_URL+"app/views/login/recover_password_form.php");
 }
-
-function login() {
-    document.querySelector('#sign-form').addEventListener('submit', event => {
+function signin() {
+    document.querySelector('#signin-form').addEventListener('submit', event => {
         event.preventDefault();
     });
 
-    let pass = document.querySelector("#sign-cpf").value;
-    let cpf = document.querySelector("#sign-pass").value;
+    let cpf = document.querySelector("#signin-cpf").value;
+    let pass = document.querySelector("#signin-pass").value;
 
-    if ((cpf !== '') && (pass !== '')) {
+    if ((cpf.length && pass.length) !== 0) {
         let data = {
             cpf: cpf,
             pass: pass
@@ -49,26 +28,196 @@ function login() {
             }
         };
 
-        if ((data.cpf.length !== 0)) {
-            const URL = BASE_URL + 'auth/login';
-            fetch(URL, options).then(response => response.json())
-                    .then(data => {
-                        if (data.success === true) {
-                            window.location = BASE_URL + 'home/home';
-                        } else {
+        const URL = BASE_URL + 'auth/signin';
+        fetch(URL, options).then(response => response.json())
+        .then(data => {
+            if (data.success === true) {
+                window.location = BASE_URL + 'home';
+            } else {
 
-                            let message = "authentication failed";
-                            let modal = document.querySelector('#auth-alert');
+                let message = "authentication failed";
+                let modalAlert = '#auth-alert';
+                let classAlert = 'alert-warning'
 
-                            modal.querySelector('#alert-class').classList.add('alert-warning');
-                            modal.querySelector('#alert-class').textContent = message;
-                            $('#auth-alert').modal('show');
-                        }
-
-                    })
-                    .catch(error => {
-                        console.log(error);
-                    });
-        }
+                messageAlert(message, modalAlert, classAlert);
+            }
+        })
+        .catch(error => {
+            console.log(error);
+        });
     }
 }
+
+function signupClient() {
+
+    document.querySelector('#signup-form').addEventListener('submit', event => {
+        event.preventDefault();
+    });
+
+    let cpf = document.querySelector("#signup-cpf").value;
+    let email = document.querySelector("#signup-email").value;
+    let pass = document.querySelector("#signup-pass").value;
+
+    if ((cpf.length && email.length && pass.length) !== 0) {
+        let data = {
+            cpf: cpf,
+            email: email,
+            pass: pass
+
+        };
+        
+
+        const options = {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json;charset=utf-8'
+            },
+            body: JSON.stringify(data)
+        };
+            
+       const URL = BASE_URL + 'auth/signup';
+            
+        fetch(URL, options)
+        .then(response => response.json())
+        .then(data => {
+            let message = "registration failed";
+            let modalAlert = '#signup-alert';
+            let classAlert = 'alert-warning';
+            
+            if (data.success === true) {
+
+                message = "registration successful, sign in with cpf and password";
+                classAlert = 'alert-success';
+
+                messageAlert(message, modalAlert, classAlert);
+            } else {
+                messageAlert(message, modalAlert, classAlert);
+           }
+        })
+        .catch(error => {
+            console.log(error);
+        })
+        
+    }
+}
+
+function messageAlert(message, modalAlert, classAlert) {
+    let modal = document.querySelector(modalAlert);
+
+    modal.querySelector('#alert-class').classList.add(classAlert);
+    modal.querySelector('#alert-class').textContent = message;
+
+    $(modalAlert).fadeIn(700, function(){
+        window.setTimeout(function(){
+            $(modalAlert).fadeOut();
+        }, 2000);
+    });
+}
+
+function fullSignupForm() {
+    $("#container-content").load(BASE_URL+"app/views/home/signup_form.php");
+}
+
+function signupFullClient() {
+    
+    document.querySelector('#signupfull-form').addEventListener('submit', event => {
+        event.preventDefault();
+    });
+    let name = document.querySelector("#signupfull-name").value;
+    let surname = document.querySelector("#signupfull-surname").value;
+    let cpf = document.querySelector("#signupfull-cpf").value;
+    let email = document.querySelector("#signupfull-email").value;
+    let ordenado = document.querySelector("#signupfull-ordenado").value;
+
+    if ((name.length && surname.length && cpf.length && email.length && ordenado.length) !== 0) {
+        let data = {
+            name: name,
+            surname: surname,
+            cpf: cpf,
+            email: email,
+            ordenado: ordenado
+        };
+
+        let options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        const URL = BASE_URL + 'auth/signupFull';
+        fetch(URL, options).then(response => response.json())
+        .then(data => {
+            let message = "full registration failed";
+            let modalAlert = '#signup-alert';
+            let classAlert = 'alert-warning'
+            
+            if (data.success === true) {
+                message = "full registration successful, sign in with cpf and password";
+                classAlert = 'alert-success';
+
+                messageAlert(message, modalAlert, classAlert);
+    
+                window.setTimeout(function() {
+                    window.location.href = window.location.href;
+                }, 5000);
+               
+            } else {
+                messageAlert(message, modalAlert, classAlert);
+           }
+        })
+        .catch(error => {
+            console.log(error);
+        });
+    }
+}
+
+
+function recover(){
+
+    document.querySelector('#recover-form').addEventListener('submit',event => {
+        event.preventDefault()
+    })    
+    let cpf = document.querySelector("#recover-cpf").value
+    let name = document.querySelector("#recover-name").value
+    let email = document.querySelector("#recover-email").value
+
+    if ((cpf.length && name.length && email.length) !== 0){
+        let data = {
+            cpf:cpf,
+            name:name,
+            email:email
+        }
+        console.log(data)
+        let options = {
+            method: 'POST',
+            body: JSON.stringify(data),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+
+        }
+        const URL = BASE_URL+"auth/recoverPass";
+        fetch(URL,options)
+        .then(response => response.json())
+            .then(data => {
+                let message = "Dados incorretos";
+                let modalAlert = '#signup-alert';
+                let classAlert = 'alert-warning'
+                if (data.success === true) {
+                    message = "Uma mensagem contendo sua senha será enviado ao email fornecido";
+                    classAlert = 'alert-success';
+
+                    messageAlert(data.success, modalAlert, classAlert);
+
+
+                } else {
+                    
+                    messageAlert(data.success, modalAlert, classAlert);
+                }
+            }).catch(error => console.log(error))
+    }
+}
+

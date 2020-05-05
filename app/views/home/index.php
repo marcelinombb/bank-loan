@@ -22,7 +22,7 @@
                             Por favor, informe seus dados para entrar
                         </p>
 
-                        <button class="btn login-btn" onclick="loadForm()">Entrar</button>
+                        <button class="btn login-btn" onclick="signinForm()">Entrar</button>
                     </div>
 
                 </div>
@@ -32,7 +32,7 @@
                         <h1>Criar Conta</h1>
                     </div>
                     
-                    <form id="login-form">
+                    <form id="signup-form">
                         <div class="form-group">
                             <label for="client-name">Nome</label>
                             <input type="text" class="form-control" id="client-name" required="required" placeholder="Insira nome">
@@ -42,13 +42,12 @@
                             <label for="client-cpf">CPF</label>
                             <input type="text" class="form-control" id="client-cpf" required="required" placeholder="Insira CPF">
                         </div>
-
                         <div class="form-group">
-                            <label for="client-email">E-mail</label>
-                            <input type="email" class="form-control" id="client-email" required="required" placeholder="Insira e-mail">
+                            <label for="client-pass">Senha</label>
+                            <input type="password" class="form-control" id="client-pass" required="required" placeholder="Insira senha">
                         </div>
                         
-                        <button type="submit" class="btn submit-account">Cadastrar</button>
+                        <button class="btn submit-account" onclick="signupClient()">Cadastrar</button>
                     </form>
 
                 </div>
@@ -77,8 +76,8 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/script.js"></script>
-
-        <?php $this->loadView("alerts/", "auth_alert"); ?>
+        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/jquery.min.js"></script>
+        <script type="text/javascript" src="<?= BASE_URL; ?>/public/assets/js/script_1.js"></script>
+        
     </body>
 </html>
