@@ -206,18 +206,15 @@ function recover(){
                 let message = "Dados incorretos";
                 let modalAlert = '#signup-alert';
                 let classAlert = 'alert-warning'
-
                 if (data.success === true) {
                     message = "Uma mensagem contendo sua senha será enviado ao email fornecido";
                     classAlert = 'alert-success';
 
                     messageAlert(message, modalAlert, classAlert);
 
-                    window.setTimeout(function () {
-                        window.location.href = window.location.href;
-                    }, 5000);
 
                 } else {
+                    console.log(data.success)
                     messageAlert(message, modalAlert, classAlert);
                 }
             }).catch(error => console.log(error))

@@ -155,7 +155,9 @@ class AuthController extends Controller {
         $cpf = filter_var($form['cpf'],FILTER_SANITIZE_STRING);
         $name = filter_var($form['name'],FILTER_SANITIZE_STRING);
         $email = filter_var($form['email'],FILTER_SANITIZE_STRING);
+    
         $response['success'] = false;
+
         if ($cpf && $name && $email) {
             $client = new Client();
             $client->setCpf($cpf);
@@ -163,13 +165,29 @@ class AuthController extends Controller {
             $client->setEmail($email);
             $clientDAO = new ClientDAO();
             $mail = new PHPMail();
-            $pass = $clientDAO->getPass($client) ;
-            if ($mail->sendEmail($pass['pass'])) {
-                $response['success'] = true;
+            $token = $clientDAO->getToken($client);
+            if($token)
+            {
+                session_start();
+                $_SESSION['token'] = $token['token'];
+                if($mail->sendEmail($token['token'],$client))
+                {
+                    $response['success'] = true;
+                }
             }
+            
         }
         echo json_encode($response);
+    }
 
+    public function changePassForm(){
+        $token = filter_input(INPUT_GET, "token",FILTER_SANITIZE_STRING);
+        $data['token'] = $token;
+        if ($token) {
+            $this->loadView("login","/change_pass_form",$data);
+        }else{
+            header("Location:".BASE_URL);
+        }
     }
 }
 ?>
